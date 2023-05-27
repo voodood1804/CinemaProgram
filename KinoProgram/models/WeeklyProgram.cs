@@ -32,5 +32,6 @@ namespace KinoProgram.models
         public virtual CinemaHall CinemaHall { get; set; }
         public  int CinemaHallId { get; set; }
         public DateTime PlayTime { get; set; }
+
     }
 }

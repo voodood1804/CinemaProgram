@@ -11,16 +11,18 @@
             <th>Duration</th>
             <th>ReleaseDate</th>
             <th>MovieCategory</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach(var m in Model.Movies)
+        @foreach (var m in Model.WeeklyProgams)
         {
             <tr>
-                <td>@m.Name</td>
-                <td>@m.Duration</td>
+                <td>@m.CalendarWeek</td>
+                <td></td>
                 <td>@m.ReleaseDate</td>
                 <td>@m.MovieCategory.ToString()</td>
+                <td><a href="@($"/Cinema/Details/{m.Guid}")">Details</a></td>
             </tr>
         }
     </tbody>

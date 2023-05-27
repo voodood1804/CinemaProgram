@@ -10,14 +10,14 @@ namespace KinoProgram.Webapp.Pages.Cinema
     public class IndexModel : PageModel
     {
         private readonly CinemaContext _db;
-        public List<Movie> Movies { get; private set; } = new();
+        public List<WeeklyProgram> WeeklyProgams { get; private set; } = new();
         public IndexModel(CinemaContext db)
         {
             _db = db;
         }
         public void OnGet()
         {
-            Movies = _db.Movies.OrderBy(m => m.Name).ToList();
+            WeeklyProgams = _db.WeeklyPrograms.OrderBy(m => m.CalendarWeek).ToList();
         }
     }
 }

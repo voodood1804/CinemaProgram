@@ -18,6 +18,7 @@ namespace KinoProgram.models
             Duration = duration;
             ReleaseDate = releaseDate;
             MovieCategory = movieCategory;
+            Guid = Guid.NewGuid();
         }
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -29,5 +30,6 @@ namespace KinoProgram.models
         public int Duration { get; set; }
         public DateTime ReleaseDate { get; set; }
         public MovieCategory MovieCategory { get; set; }
+        public Guid Guid { get; private set; }
     }
 }
