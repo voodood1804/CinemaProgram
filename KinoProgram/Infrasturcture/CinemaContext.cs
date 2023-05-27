@@ -24,6 +24,8 @@ namespace KinoProgram.Infrasturcture
 
         public void Seed()
         {
+            Randomizer.Seed = new Random(1111);
+           
             var movies = new Faker<Movie>("de").CustomInstantiator(m => new Movie(
                 name: m.Person.FirstName,
                 duration: m.Random.Int(60, 400),
