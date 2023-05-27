@@ -1,0 +1,27 @@
+﻿@page
+@model KinoProgram.Webapp.Pages.Cinema.IndexModel
+
+<h3>Movies in Databank</h3>
+<p>Erstellt um @DateTime.Now</p>
+
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Duration</th>
+            <th>ReleaseDate</th>
+            <th>MovieCategory</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var m in Model.Movies)
+        {
+            <tr>
+                <td>@m.Name</td>
+                <td>@m.Duration</td>
+                <td>@m.ReleaseDate</td>
+                <td>@m.MovieCategory.ToString()</td>
+            </tr>
+        }
+    </tbody>
+</table>

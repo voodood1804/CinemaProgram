@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KinoProgram\KinoProgram.csproj" />
+    <ProjectReference Include="..\KinoProgram\KinoProgram.Application.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KinoProgram", "KinoProgram\KinoProgram.csproj", "{864AE552-0459-4D0D-8165-111C079A926D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KinoProgram.Application", "KinoProgram\KinoProgram.Application.csproj", "{864AE552-0459-4D0D-8165-111C079A926D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KinoProgram.Test", "KinoProgram.Test\KinoProgram.Test.csproj", "{6095EB63-6156-449D-935A-C9F767720B8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KinoProgram.Test", "KinoProgram.Test\KinoProgram.Test.csproj", "{6095EB63-6156-449D-935A-C9F767720B8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KinoProgram.Webapp", "KinoProgram.Webapp\KinoProgram.Webapp.csproj", "{F053455C-F4F3-42C6-88F1-AD106B0F3144}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{6095EB63-6156-449D-935A-C9F767720B8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6095EB63-6156-449D-935A-C9F767720B8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6095EB63-6156-449D-935A-C9F767720B8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F053455C-F4F3-42C6-88F1-AD106B0F3144}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F053455C-F4F3-42C6-88F1-AD106B0F3144}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F053455C-F4F3-42C6-88F1-AD106B0F3144}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F053455C-F4F3-42C6-88F1-AD106B0F3144}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
