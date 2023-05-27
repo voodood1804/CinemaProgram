@@ -9,7 +9,7 @@ namespace SpaceProgram.Test
         private CinemaContext GetDatabase(bool deleteDb = false)
         {
             var db = new CinemaContext(new DbContextOptionsBuilder()
-                .UseSqlite("Data Source = SpaceProgram.db")
+                .UseSqlite("Data Source = KinoProgram.db")
                 .UseLazyLoadingProxies()
                 .Options);
             if (deleteDb)

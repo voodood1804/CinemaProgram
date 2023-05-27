@@ -1,4 +1,5 @@
-﻿using KinoProgram.models;
+﻿using Bogus;
+using KinoProgram.models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -23,10 +24,36 @@ namespace KinoProgram.Infrasturcture
 
         public void Seed()
         {
-            Movies.Add(new Movie("movie1", 130, new DateTime(2003, 04, 04), MovieCategory.Fantasy));
-            Movies.Add(new Movie("movie2", 140, new DateTime(2003, 05, 04), MovieCategory.Action));
-            Movies.Add(new Movie("movie2", 150, new DateTime(2003, 06, 04), MovieCategory.Horror));
-            Movies.Add(new Movie("movie3", 160, new DateTime(2003, 07, 04), MovieCategory.ScienceFiction));
+            var movies = new Faker<Movie>("de").CustomInstantiator(m => new Movie(
+                name: m.Person.FirstName,
+                duration: m.Random.Int(60, 400),
+                releaseDate: m.Person.DateOfBirth,
+                movieCategory: m.PickRandom<MovieCategory>()
+                ))
+                .Generate(10)
+                .ToList();
+            Movies.AddRange(movies);
+            SaveChanges();
+
+            var cinemaHalls = new Faker<CinemaHall>("de").CustomInstantiator(c => new CinemaHall(
+                rows: c.Random.Int(5, 12),
+                columns: c.Random.Int(1, 15)
+                ))
+                .Generate(10)
+                .ToList();
+            CinemaHalls.AddRange(cinemaHalls);
+            SaveChanges();
+
+            var weeklyProgram = new Faker<WeeklyProgram>("de").CustomInstantiator(w => new WeeklyProgram(
+                calendarWeek: w.Random.Int(1, 52),
+                movie: w.Random.ListItem(movies),
+                cinemaHall: w.Random.ListItem(cinemaHalls),
+                playTime: w.Person.DateOfBirth
+                ))
+                .Generate(10)
+                .ToList();
+            WeeklyPrograms.AddRange(weeklyProgram);
+            SaveChanges();      
         }
     }
 }
