@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace KinoProgram.models
 {
@@ -22,7 +23,7 @@ namespace KinoProgram.models
         }
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        protected WeeklyProgram() { }
+        public WeeklyProgram() { }
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
         public int Id { get; private set; }
@@ -32,6 +33,6 @@ namespace KinoProgram.models
         public virtual CinemaHall CinemaHall { get; set; }
         public  int CinemaHallId { get; set; }
         public DateTime PlayTime { get; set; }
-
+        public int Movies { get; set; } = 0;
     }
 }

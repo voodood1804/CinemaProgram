@@ -52,7 +52,7 @@ namespace KinoProgram.Infrasturcture
                 cinemaHall: w.Random.ListItem(cinemaHalls),
                 playTime: w.Person.DateOfBirth
                 ))
-                .Generate(10)
+                .Generate(104)
                 .ToList();
             WeeklyPrograms.AddRange(weeklyProgram);
             SaveChanges();      

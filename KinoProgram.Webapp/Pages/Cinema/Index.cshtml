@@ -7,22 +7,20 @@
 <table class="table table-sm">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Duration</th>
-            <th>ReleaseDate</th>
-            <th>MovieCategory</th>
+            <th>CalendarWeek</th>
+            <th>Movies</th>
+            <th>Genres</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var m in Model.WeeklyProgams)
+        @foreach (var w in Model.WeeklyProgams)
         {
             <tr>
-                <td>@m.CalendarWeek</td>
-                <td></td>
-                <td>@m.ReleaseDate</td>
-                <td>@m.MovieCategory.ToString()</td>
-                <td><a href="@($"/Cinema/Details/{m.Guid}")">Details</a></td>
+                <td>@w.CalendarWeek</td>
+                <td>@w.Movies</td>
+                <td>@w.</td>
+                <td>@w.</td>
             </tr>
         }
     </tbody>

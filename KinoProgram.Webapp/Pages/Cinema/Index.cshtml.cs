@@ -3,6 +3,7 @@ using KinoProgram.models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace KinoProgram.Webapp.Pages.Cinema
@@ -17,7 +18,11 @@ namespace KinoProgram.Webapp.Pages.Cinema
         }
         public void OnGet()
         {
-            WeeklyProgams = _db.WeeklyPrograms.OrderBy(m => m.CalendarWeek).ToList();
+            WeeklyProgams = _db.WeeklyPrograms.GroupBy(g => g.CalendarWeek).Select(s => new WeeklyProgram
+            {
+                CalendarWeek = s.Key,
+                Movies = s.Count(),
+            }).ToList();
         }
     }
 }
