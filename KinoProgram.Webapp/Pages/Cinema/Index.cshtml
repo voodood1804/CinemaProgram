@@ -1,27 +1,44 @@
 ﻿@page
 @model KinoProgram.Webapp.Pages.Cinema.IndexModel
+@section head {
+    <style>
+        .weeks {
+            display: flex;
+            flex-wrap: wrap;
+            gap:1em;
+        }
+        .week {
+            width: 10em;
+            height: 100px;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid gray;
+        }
 
-<h3>Movies in Databank</h3>
+        .weekHeader {
+            font-size:140%;
+        }
+        .weekBody {
+            display: flex;
+            column-gap: 1em;
+            left: 10px;
+        }
+
+    </style>
+}
+<h3>Cinma Weeklyprogram</h3>
 <p>Erstellt um @DateTime.Now</p>
 
-<table class="table table-sm">
-    <thead>
-        <tr>
-            <th>CalendarWeek</th>
-            <th>Movies</th>
-            <th>Genres</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var w in Model.WeeklyProgams)
-        {
-            <tr>
-                <td>@w.CalendarWeek</td>
-                <td>@w.Movies</td>
-                <td>@w.</td>
-                <td>@w.</td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="weeks">
+    @foreach (var w in Model.WeeklyProgams)
+    {
+        <div class="week">
+            <div class="weekHeader">@w.WeekNumber</div>
+            <div class="weekBody">
+                <div class="movieCount">@w.MoviesCount</div>
+                <div class="genreList">@w.GenreList</div>
+            </div>
+
+        </div>
+    }
+</div>
