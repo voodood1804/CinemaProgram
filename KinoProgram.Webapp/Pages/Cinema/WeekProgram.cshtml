@@ -1,0 +1,34 @@
+﻿@page "{WeekNumber}"
+@model KinoProgram.Webapp.Pages.Cinema.WeekProgramModel
+@section head 
+{
+}
+<h3>The Cinema program of this Week</h3>
+<p>Created at @DateTime.Now.ToString("HH:mm").</p>
+
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Movie</th>
+            <th>Genre</th>
+            <th>Hall</th>
+            <th>Duration</th>
+            <th>PlayTime</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var w in Model.WeekProgram)
+        {
+                <tr>
+                    <td>@w.MovieName</td>
+                    <td>@w.Genre</td>
+                    <td>@w.Hall</td>
+                    <td>@w.Duration Minutes</td>
+                    <td>@w.PlayTime.ToString("HH:mm")</td>
+                <td><a asp-page="/Cinema/Details" asp-route-guid="@w.Guid">Details</a></td>
+                </tr>
+        }
+    </tbody>
+</table>
+<a href="/Cinema/Index">Return to Movie List</a>

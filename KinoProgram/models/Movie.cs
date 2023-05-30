@@ -12,10 +12,11 @@ namespace KinoProgram.models
     public class Movie
     {
         //duration is in Minutes
-        public Movie(string name, int duration, DateTime releaseDate, MovieCategory movieCategory) 
+        public Movie(string name,string description, int duration, DateTime releaseDate, MovieCategory movieCategory) 
         {
             Name = name;
             Duration = duration;
+            Description = description;
             ReleaseDate = releaseDate;
             MovieCategory = movieCategory;
             Guid = Guid.NewGuid();
@@ -27,6 +28,7 @@ namespace KinoProgram.models
 
         public int Id { get; private set; }
         public string Name { get; set; }
+        public string Description { get; set; }
         public int Duration { get; set; }
         public DateTime ReleaseDate { get; set; }
         public MovieCategory MovieCategory { get; set; }

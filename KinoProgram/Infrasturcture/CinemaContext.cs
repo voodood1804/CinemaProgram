@@ -28,6 +28,7 @@ namespace KinoProgram.Infrasturcture
            
             var movies = new Faker<Movie>("de").CustomInstantiator(m => new Movie(
                 name: m.Person.FirstName,
+                description: m.Music.Genre(),
                 duration: m.Random.Int(60, 400),
                 releaseDate: m.Person.DateOfBirth,
                 movieCategory: m.PickRandom<MovieCategory>()

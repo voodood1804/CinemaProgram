@@ -16,6 +16,15 @@
             background-color: #f7f7f5;
             cursor: pointer;
         }
+        .week:hover{
+            background-color: lightgray;
+        }
+        .noweek {
+            cursor: default;
+        }
+        .noweek:hover{
+            background-color: #f7f7f5;
+        }
 
         .weekHeader {
             font-size:140%;
@@ -41,14 +50,25 @@
 <p>Erstellt um @DateTime.Now</p>
 
 <div class="weeks">
-    @foreach (var w in Model.WeeklyProgams)
+    @foreach (var w in Model.WeeklyPrograms)
     {
-        <div class="week" onclick="location.href='https://localhost:7090/'">
+        if (w.MoviesCount > 0)
+        {
+            <div class="week" onclick="location.href='@($"/Cinema/WeekProgram/{w.WeekNumber}")'">
             <div class="weekHeader">Week @w.WeekNumber</div>
             <div class="weekBody">
                 <div class="genreList">Genre:<br />@w.GenreList</div>
             </div>
-
         </div>
+        }
+        else
+        {
+           <div class="week noweek">
+            <div class="weekHeader">Week @w.WeekNumber</div>
+            <div class="weekBody">
+                <div class="genreList">Genre:<br />@w.GenreList</div>
+            </div>
+        </div> 
+        }
     }
 </div>

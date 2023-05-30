@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KinoProgram.Application", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KinoProgram.Test", "KinoProgram.Test\KinoProgram.Test.csproj", "{6095EB63-6156-449D-935A-C9F767720B8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KinoProgram.Webapp", "KinoProgram.Webapp\KinoProgram.Webapp.csproj", "{F053455C-F4F3-42C6-88F1-AD106B0F3144}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KinoProgram.Webapp", "KinoProgram.Webapp\KinoProgram.Webapp.csproj", "{F053455C-F4F3-42C6-88F1-AD106B0F3144}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

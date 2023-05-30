@@ -15,16 +15,14 @@ namespace KinoProgram.Webapp.Pages.Cinema
         {
             _db = db;
         }
-        public Movie Movie { get; private set; }
+        public Movie Movie { get; private set; } = default!;
         public IActionResult OnGet(Guid guid)
         {
-            // SELECT * FROM Stores INNER JOIN Offers ON (...)
-            // INNER JOIN Product ON (...)
             var movie = _db.Movies
-                .FirstOrDefault(s => s.Guid == guid);
+                .FirstOrDefault(m => m.Guid == guid);
             if (movie == null)
             {
-                return RedirectToPage("/Cinema/Index");
+                return RedirectToPage("/Cinema/Movies");
             }
             Movie = movie;
             return Page();

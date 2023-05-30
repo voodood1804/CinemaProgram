@@ -1,0 +1,32 @@
+﻿@page
+@model KinoProgram.Webapp.Pages.Cinema.MoviesModel
+@section head 
+{
+}
+<h3>The Cinema program of this Week</h3>
+<p>Created at @DateTime.Now.ToString("HH:mm").</p>
+
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Movie</th>
+            <th>Genre</th>
+            <th>Duration</th>
+            <th>Releasedate</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model.Movies)
+        {
+                <tr>
+                    <td>@m.Name</td>
+                    <td>@m.MovieCategory.ToString()</td>
+                    <td>@m.Duration Minutes</td>
+                    <td>@m.ReleaseDate.ToString("yyy-mm-dd")</td>
+                <td><a asp-page="/Cinema/Details" asp-route-guid="@m.Guid">Details</a></td>
+                </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,4 +1,29 @@
 ﻿@page "{guid}"
 @model KinoProgram.Webapp.Pages.Cinema.DetailsModel
-@{
+@section head
+{
+    <style>
+        .inf {
+            display: flex;
+            width: 75%;
+        }
+        .inf-left {
+            width: 50%;
+        }
+    </style>
+
 }
+<h1>Details for the Movie</h1>
+
+<div class="inf">
+    <div class="inf-left">
+        <h3>Name: @Model.Movie.Name</h3>
+        <h3>Genre: @Model.Movie.MovieCategory.ToString()</h3>
+        <h3>Duration: @Model.Movie.Duration Minutes</h3>
+        <h3>Releasedate: @Model.Movie.ReleaseDate.ToString("yyy-mm-dd")</h3>
+    </div>
+    <div class ="inf-right">
+        <h3>Description: <br />@Model.Movie.Description</h3>
+    </div>
+</div>
+<h3><a asp-page="/Cinema/Index">Return</a></h3>
