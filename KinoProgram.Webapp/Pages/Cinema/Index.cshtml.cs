@@ -13,7 +13,7 @@ namespace KinoProgram.Webapp.Pages.Cinema
         public record WeeklyProgramDto(
             int WeekNumber,
             string GenreList,
-            int MoviesCount);
+            int? MoviesCount);
         private readonly CinemaContext _db;
         public List<WeeklyProgramDto> WeeklyProgams { get; private set; } = new();
         public IndexModel(CinemaContext db)
@@ -29,15 +29,15 @@ namespace KinoProgram.Webapp.Pages.Cinema
                     g.Key,
                     string.Join(", ", g.Select(g => g.Movie.MovieCategory.ToString())),
                     g.Count()))
-                .ToList();
-            WeeklyProgams = Enumerable.Range(1, 52)
+                .ToList();            WeeklyProgams = Enumerable.Range(1, 52)
                 .GroupJoin(weeklyPrograms, w => w, w => w.WeekNumber, (week, movies) =>
                 {
                     if (movies.Any()) { return movies.First(); }
-                    return new WeeklyProgramDto(week, string.Empty, 0);
+                    return new WeeklyProgramDto(week, "There is no Program this Week.", null);
                 })
                 .OrderBy(m => m.WeekNumber)
                 .ToList();
+            
         }
     }
 }

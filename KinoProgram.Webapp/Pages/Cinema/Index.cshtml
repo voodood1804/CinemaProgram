@@ -8,35 +8,45 @@
             gap:1em;
         }
         .week {
-            width: 10em;
-            height: 100px;
+            width: 225px;
+            height: 225px;
             display: flex;
             flex-direction: column;
-            border: 1px solid gray;
+            border: 1px solid black;
+            background-color: #f7f7f5;
+            cursor: pointer;
         }
 
         .weekHeader {
             font-size:140%;
+            height: 25%;
+            margin: 12% 5%;
+            border-bottom: 1px solid black;
         }
         .weekBody {
-            display: flex;
-            column-gap: 1em;
-            left: 10px;
+            margin: 5% 10%;
         }
+
+        a.fill-div {
+            display: block;
+            height: 100%;
+            width: 100%;
+            text-decoration: none;
+        }
+
 
     </style>
 }
-<h3>Cinma Weeklyprogram</h3>
+<h3>Weeklyprogram</h3>
 <p>Erstellt um @DateTime.Now</p>
 
 <div class="weeks">
     @foreach (var w in Model.WeeklyProgams)
     {
-        <div class="week">
-            <div class="weekHeader">@w.WeekNumber</div>
+        <div class="week" onclick="location.href='https://localhost:7090/'">
+            <div class="weekHeader">Week @w.WeekNumber</div>
             <div class="weekBody">
-                <div class="movieCount">@w.MoviesCount</div>
-                <div class="genreList">@w.GenreList</div>
+                <div class="genreList">Genre:<br />@w.GenreList</div>
             </div>
 
         </div>
