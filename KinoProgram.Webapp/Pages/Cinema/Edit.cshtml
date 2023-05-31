@@ -35,9 +35,7 @@
     <div class="row">
         <div class="col-12">
             <label asp-for="Movie.MovieCategory">Genre</label>
-            <select class="form-control" asp-for="Movie.MovieCategory" asp-items="Html.GetEnumSelectList<models.MovieCategory>()">
-                <option selected="selected" value="">Please select genre</option>
-            </select>
+            <select class="form-control" asp-for="Movie.MovieCategory" asp-items="Html.GetEnumSelectList<models.MovieCategory>()"></select>
             <span class="text-danger" asp-validation-for="Movie.MovieCategory"></span>
 
         </div>
