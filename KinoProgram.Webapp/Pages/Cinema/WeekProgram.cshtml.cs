@@ -59,7 +59,7 @@ namespace KinoProgram.Webapp.Pages.Cinema
             _mapper.Map(NewWeekProgram, weeklyprogram);
             try
             {
-                _db.WeeklyPrograms.Add(weeklyprogram);
+                _db.Add(weeklyprogram);
                 _db.SaveChanges();
             }
             catch (DbUpdateException)
