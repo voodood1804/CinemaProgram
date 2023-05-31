@@ -24,7 +24,10 @@
                     <td>@m.MovieCategory.ToString()</td>
                     <td>@m.Duration Minutes</td>
                     <td>@m.ReleaseDate.ToString("yyy-mm-dd")</td>
-                <td><a asp-page="/Cinema/Details" asp-route-guid="@m.Guid">Details</a></td>
+                <td>
+                    <a asp-page="/Cinema/Details" asp-route-guid="@m.Guid">Details</a>
+                    <a asp-page="/Cinema/Edit" asp-route-guid="@m.Guid">Edit</a>
+                </td>
                 </tr>
         }
     </tbody>

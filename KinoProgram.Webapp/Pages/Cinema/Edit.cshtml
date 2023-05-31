@@ -1,0 +1,47 @@
+﻿@page "{guid}"
+@model KinoProgram.Webapp.Pages.Cinema.EditModel
+@{
+}
+<form method="post">
+    <input type="hidden" asp-for="Movie.Guid"/>
+    <div class="row">
+        <div class="col-12 col-sm-6">
+            <label asp-for="Movie.Name">Name</label>
+            <input class="form-control" asp-for="Movie.Name" />
+            <span class="text-danger" asp-validation-for="Movie.Name"></span>
+        </div>
+        <div class="col-12 col-sm-6">
+            <label asp-for="Movie.ReleaseDate">ReleaseDate</label>
+            <input type="date" class="form-control" asp-for="Movie.ReleaseDate" />
+            <span class="text-danger" asp-validation-for="Movie.ReleaseDate"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <label asp-for="Movie.Duration">Duration</label>
+            <input class="form-control" asp-for="Movie.Duration" />
+            <span class="text-danger" asp-validation-for="Movie.Duration"></span>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <label asp-for="Movie.Description">Description</label>
+            <input class="form-control" asp-for="Movie.Description" />
+            <span class="text-danger" asp-validation-for="Movie.Description"></span>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <label asp-for="Movie.MovieCategory">Genre</label>
+            <select class="form-control" asp-for="Movie.MovieCategory" asp-items="Html.GetEnumSelectList<models.MovieCategory>()">
+                <option selected="selected" value="">Please select genre</option>
+            </select>
+            <span class="text-danger" asp-validation-for="Movie.MovieCategory"></span>
+
+        </div>
+    </div>
+    <div class="mt-3 text-danger" asp-validation-summary=All></div>
+    <button class="btn-primary btn" type="submit">Send</button>
+</form>
