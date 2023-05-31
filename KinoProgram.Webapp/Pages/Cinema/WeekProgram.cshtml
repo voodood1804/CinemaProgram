@@ -3,8 +3,34 @@
 @section head 
 {
 }
-<h3>The Cinema program of this Week</h3>
+<h3>The program of this Week</h3>
 <p>Created at @DateTime.Now.ToString("HH:mm").</p>
+
+<form method="post" asp-page-handler="NewWeekProgram">
+    <div class="row">
+        <div class="col-6">
+            <label asp-for="NewWeekProgram.Movie">Movie</label>
+            <select class="form-select" 
+                asp-items="@Model.MovieSelectList"
+                    asp-for="NewWeekProgram.Movie"></select>
+        </div>
+        <div class="col-6">
+            <label asp-for="NewWeekProgram.CinemaHall">Hall</label>
+            <select class="form-select"
+                    asp-items="@Model.HallSelectList"
+                    asp-for="NewWeekProgram.CinemaHall"></select>
+        </div>
+        <div class="col-6">
+            <label asp-for="NewWeekProgram.PlayTime">PlayTime</label>
+            <input type="date" class="form-control" asp-for="NewWeekProgram.PlayTime" />
+            <small>
+                <span class="text-danger" asp-validation-for="NewWeekProgram.PlayTime"></span>
+            </small>
+        </div>
+    </div>
+    <div class="text-danger" asp-validation-summary=ModelOnly></div>
+    <button class="mt-2 btn btn-primary">Speichern</button>
+</form>
 
 <table class="table table-sm">
     <thead>
@@ -25,7 +51,7 @@
                     <td>@w.Genre</td>
                     <td>@w.Hall</td>
                     <td>@w.Duration Minutes</td>
-                    <td>@w.PlayTime.ToString("HH:mm")</td>
+                    <td>On the @w.PlayTime.ToString("dd. @ HH:mm")</td>
                     <td>
                     <a asp-page="/Cinema/Details" asp-route-guid="@w.Guid">Details</a>
                     
