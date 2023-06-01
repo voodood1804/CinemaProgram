@@ -20,6 +20,12 @@ namespace KinoProgram.Infrasturcture
         {
             modelBuilder.Entity<WeeklyProgram>().HasOne(w => w.Movie);
             modelBuilder.Entity<WeeklyProgram>().HasOne(w => w.CinemaHall);
+            foreach (var entity in modelBuilder.Model.GetEntityTypes())
+            {
+                var type = entity.ClrType;
+                if (type.GetProperty("Guid") is not null)
+                    modelBuilder.Entity(type).HasAlternateKey("Guid");
+            }
         }
 
         public void Seed()

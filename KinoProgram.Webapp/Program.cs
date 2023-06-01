@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using KinoProgram.Infrasturcture;
 using KinoProgram.Webapp.Dto;
+using KinoProgram.Application.Infrasturcture.Repositories;
 
 // Create and seed databank
 var opt = new DbContextOptionsBuilder()
@@ -21,6 +22,9 @@ builder.Services.AddDbContext<CinemaContext>(opt =>
 {
     opt.UseSqlite("Data Source = KinoProgram.db");
 });
+builder.Services.AddTransient<WeeklyProgramRepository>();
+builder.Services.AddTransient<MovieRepository>();
+builder.Services.AddTransient<WeekProgramRepository>();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddRazorPages();
 

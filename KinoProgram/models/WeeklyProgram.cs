@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KinoProgram.Application.models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Transactions;
 namespace KinoProgram.models
 {
     [Table("WeeklyProgram")]
-    public class WeeklyProgram
+    public class WeeklyProgram : IEntity<int>
     {
         public WeeklyProgram(int calendarWeek, Movie movie, CinemaHall cinemaHall, DateTime playTime) 
         {
@@ -19,6 +20,7 @@ namespace KinoProgram.models
             CinemaHall = cinemaHall;
             CinemaHallId = cinemaHall.Id;
             PlayTime = playTime;
+            Guid = Guid.NewGuid();
         }
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -33,5 +35,6 @@ namespace KinoProgram.models
         public  int CinemaHallId { get; set; }
         public DateTime PlayTime { get; set; }
         public int Movies { get; set; } = 0;
+        public Guid Guid { get; private set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using KinoProgram.Application.models;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -9,7 +11,7 @@ namespace KinoProgram.models
 {
     public enum MovieCategory {Horror = 1, ScienceFiction, Fantasy, Action, Thriller, Drama, Mystery, Comedy}
     [Table("Movie")]
-    public class Movie
+    public class Movie : IEntity<int>
     {
         //duration is in Minutes
         public Movie(string name,string description, int duration, DateTime releaseDate, MovieCategory movieCategory) 

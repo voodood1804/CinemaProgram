@@ -11,6 +11,8 @@ namespace KinoProgram.Webapp.Dto
             CreateMap<Movie, MovieDto>();
             CreateMap<Movie, NewMovieDto>();
             CreateMap<NewMovieDto, Movie>();
+            CreateMap<BulkMovieDto, Movie>();
+            CreateMap<Movie, BulkMovieDto>();
             CreateMap<WeeklyProgram, WeeklyProgramDto>();
             CreateMap<WeeklyProgramDto, WeeklyProgram>();
         }

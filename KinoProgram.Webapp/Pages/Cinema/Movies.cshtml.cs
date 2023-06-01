@@ -9,50 +9,57 @@ using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using KinoProgram.Webapp.Dto;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.Filters;
+using AutoMapper.QueryableExtensions;
+using KinoProgram.Application.Infrasturcture.Repositories;
 
 namespace KinoProgram.Webapp.Pages.Cinema
 {
     public class MoviesModel : PageModel
     {
-        private readonly CinemaContext _db;
+        private readonly MovieRepository _db;
         private readonly IMapper _mapper;
-        public List<Movie> Movies { get; private set; } = new();
-        [BindProperty]
-        public NewMovieDto NewMovie { get; set; } = null!;
-        public MoviesModel(CinemaContext db, IMapper mapper)
+        public MoviesModel(MovieRepository db, IMapper mapper)
         {
             _db = db;
             _mapper = mapper;
         }
-        public IActionResult OnPostNewMovie()
+        public IReadOnlyList<Movie> Movies { get; private set; } = new List<Movie>();
+        //[BindProperty]
+        //public Dictionary<int, BulkMovieDto> EditMovies { get; private set; } = new();
+        [BindProperty]
+        public NewMovieDto NewMovie { get; set; } = null!;
+        public IActionResult OnPostNewMovie(NewMovieDto NewMovie)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
+            var movie = new Movie(name: NewMovie.Name,
+                    description: NewMovie.Description,
+                    duration: NewMovie.Duration,
+                    releaseDate: NewMovie.ReleaseDate,
+                    movieCategory: NewMovie.MovieCategory);
 
-            var movie = _mapper.Map<Movie>(NewMovie);
-            if (movie is null)
+            var (success, message) = _db.Insert(movie);
+            if(!success) 
             {
-                return RedirectToPage("/Cinema/Movies");
-            }
-            _mapper.Map(NewMovie, movie);
-            _db.Entry(movie).State = EntityState.Modified;
-            try
-            {
-                _db.Add(movie);
-                _db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                ModelState.AddModelError("", "Fehler beim Schreiben in die Datenbank");
+                ModelState.AddModelError("", message);
                 return Page();
             }
             return RedirectToPage("/Cinema/Movies");
         }
-        public void OnGet()
+        public IActionResult OnGet()
         {
-            Movies = _db.Movies.OrderBy(m => m.Name).ToList();
+            return Page();
+        }
+
+        public override void OnPageHandlerExecuting(PageHandlerExecutingContext context)
+        {
+            Movies = _db.GetMovies();
+            //EditMovies = _db.Movies
+            //    .ProjectTo<BulkMovieDto>(_mapper.ConfigurationProvider)
+            //    .ToDictionary(m => m.Id, m => m);
         }
     }
 }
