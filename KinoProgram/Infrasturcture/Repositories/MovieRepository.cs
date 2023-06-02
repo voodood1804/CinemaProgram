@@ -17,11 +17,6 @@ namespace KinoProgram.Application.Infrasturcture.Repositories
             return movies;
         }
 
-        public override (bool success, string? message) Update(Movie entity)
-        {
-            return base.Update(entity);
-        }
-
         public override (bool success, string? message) Insert(Movie entity)
         {
             return base.Insert(entity);

@@ -2,41 +2,41 @@
 @model KinoProgram.Webapp.Pages.Cinema.EditModel
 @{
 }
-<form method="post">
-    <input type="hidden" asp-for="Movie.Guid"/>
+<form method="post" asp-page-handler="Edit">
+    <input type="hidden" asp-for="@Model.Movie.Guid" />
     <div class="row">
         <div class="col-12 col-sm-6">
-            <label asp-for="Movie.Name">Name</label>
-            <input class="form-control" asp-for="Movie.Name" />
-            <span class="text-danger" asp-validation-for="Movie.Name"></span>
+            <label asp-for="@Model.Movie.Name">Name</label>
+            <input class="form-control" asp-for="@Model.Movie.Name" />
+            <span class="text-danger" asp-validation-for="@Model.Movie.Name"></span>
         </div>
         <div class="col-12 col-sm-6">
-            <label asp-for="Movie.ReleaseDate">ReleaseDate</label>
-            <input type="date" class="form-control" asp-for="Movie.ReleaseDate" />
-            <span class="text-danger" asp-validation-for="Movie.ReleaseDate"></span>
+            <label asp-for="@Model.Movie.ReleaseDate">ReleaseDate</label>
+            <input type="date" class="form-control" asp-for="@Model.Movie.ReleaseDate" />
+            <span class="text-danger" asp-validation-for="@Model.Movie.ReleaseDate"></span>
         </div>
     </div>
     <div class="row">
         <div class="col-12">
-            <label asp-for="Movie.Duration">Duration</label>
-            <input class="form-control" asp-for="Movie.Duration" />
-            <span class="text-danger" asp-validation-for="Movie.Duration"></span>
+            <label asp-for="@Model.Movie.Duration">Duration</label>
+            <input class="form-control" asp-for="@Model.Movie.Duration" />
+            <span class="text-danger" asp-validation-for="@Model.Movie.Duration"></span>
 
         </div>
     </div>
     <div class="row">
         <div class="col-12">
-            <label asp-for="Movie.Description">Description</label>
-            <input class="form-control" asp-for="Movie.Description" />
-            <span class="text-danger" asp-validation-for="Movie.Description"></span>
+            <label asp-for="@Model.Movie.Description">Description</label>
+            <input class="form-control" asp-for="@Model.Movie.Description" />
+            <span class="text-danger" asp-validation-for="@Model.Movie.Description"></span>
 
         </div>
     </div>
     <div class="row">
         <div class="col-12">
-            <label asp-for="Movie.MovieCategory">Genre</label>
-            <select class="form-control" asp-for="Movie.MovieCategory" asp-items="Html.GetEnumSelectList<models.MovieCategory>()"></select>
-            <span class="text-danger" asp-validation-for="Movie.MovieCategory"></span>
+            <label asp-for="@Model.Movie.MovieCategory">Genre</label>
+            <select class="form-control" asp-for="@Model.Movie.MovieCategory" asp-items="Html.GetEnumSelectList<models.MovieCategory>()"></select>
+            <span class="text-danger" asp-validation-for="@Model.Movie.MovieCategory"></span>
 
         </div>
     </div>

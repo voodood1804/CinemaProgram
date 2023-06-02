@@ -9,12 +9,13 @@ namespace KinoProgram.Webapp.Dto
         {
             CreateMap<MovieDto, Movie>();
             CreateMap<Movie, MovieDto>();
-            CreateMap<Movie, NewMovieDto>();
+
             CreateMap<Movie, EditMovieDto>();
             CreateMap<EditMovieDto, Movie>();
+
             CreateMap<NewMovieDto, Movie>();
-            CreateMap<BulkMovieDto, Movie>();
-            CreateMap<Movie, BulkMovieDto>();
+            CreateMap<Movie, NewMovieDto>();
+
             CreateMap<WeeklyProgram, WeeklyProgramDto>();
             CreateMap<WeeklyProgramDto, WeeklyProgram>();
         }

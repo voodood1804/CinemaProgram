@@ -47,7 +47,7 @@
     <button class="btn-primary btn" type="submit">Add movie</button>
 </form>
 
-<form method="post">
+<form method="post" asp-page-handler="EditMovie">
 
     <table class="table table-sm">
         <thead>
@@ -71,13 +71,11 @@
                     <td>@m.ReleaseDate.ToString("yyy-mm-dd")</td>
                     <td>
                         <a asp-page="/Cinema/Details" asp-route-guid="@m.Guid">Details</a>
-                        <a asp-page="/Cinema/Edit" asp-route-guid="@m.Guid">Edit</a>
-                    </td>
-                    <td>
-                        <button type="submit" class="btn btn-primary"
-                                asp-page-handler="EditMovie" asp-route-movieguid="@m.Guid">
+                        <a asp-page="/Cinema/Edit" class="" asp-route-guid="@m.Guid">Edit</a>
+                            <button type="submit" class="btn btn-primary"
+                            asp-page-handler="EditMovie" asp-route-movieguid="@m.Guid">
                             Save
-                        </button>
+                            </button>
                     </td>
                 </tr>
             }

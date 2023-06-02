@@ -28,6 +28,24 @@ namespace KinoProgram.Webapp.Pages.Cinema
         public Dictionary<Guid, EditMovieDto> EditMovies { get; private set; } = new();
         [BindProperty]
         public NewMovieDto NewMovie { get; set; } = null!;
+
+        public IActionResult OnPostEditMovie(Guid movieguid, Dictionary<Guid, EditMovieDto> editMovies)
+        {
+            var movie = _db.FindByGuid(movieguid);
+            if (movie == null)
+            {
+                return RedirectToPage();
+            }
+            _mapper.Map(editMovies[movieguid], movie);
+            var (success, message) = _db.Update(movie);
+            if (!success)
+            {
+                ModelState.AddModelError("", message!);
+                return Page();
+            }
+            return RedirectToPage();
+        }
+
         public IActionResult OnPostNewMovie(NewMovieDto NewMovie)
         {
             if (!ModelState.IsValid)
@@ -52,22 +70,6 @@ namespace KinoProgram.Webapp.Pages.Cinema
         {
             return Page();
         }
-        public IActionResult OnPostEditMovie(Guid movieguid, Dictionary<Guid, EditMovieDto> editMovies)
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-            var movie = _db.FindByGuid(movieguid);
-            if (movie == null)
-            {
-                return RedirectToPage();
-            }
-            _mapper.Map(EditMovies[movieguid], movie);
-            _db.Update(movie);
-            return Page();
-        }
-
 
         public override void OnPageHandlerExecuting(PageHandlerExecutingContext context)
         {

@@ -21,19 +21,20 @@ namespace KinoProgram.Webapp.Pages.Cinema
             _mapper = mapper;
         }
         [BindProperty]
-        public Movie Movie { get; set; } = null!;
-        public IActionResult OnPost(Guid guid)
+        public MovieDto Movie { get; set; } = null!;
+        public IActionResult OnPostEdit(Guid guid)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            var movie = _db.Set.FirstOrDefault(m => m.Guid == guid);
+            var movie = _db.FindByGuid(guid);
             if (movie is null)
             {
                 return RedirectToPage("/Cinema/Movies");
             }
+            _mapper.Map(Movie, movie);
             var (success, message) = _db.Update(movie);
             if (!success)
             {
@@ -45,11 +46,12 @@ namespace KinoProgram.Webapp.Pages.Cinema
         public IActionResult OnGet(Guid guid)
         {
 
-            Movie = _db.FindByGuid(guid)!;
-            if (Movie == null)
+            var movie = _db.Set.FirstOrDefault(m => m.Guid == guid);
+            if (movie == null)
             {
                 return RedirectToPage("/Cinema/Movies");
             }
+            Movie = _mapper.Map<MovieDto>(movie);
             return Page();
         }
     }
