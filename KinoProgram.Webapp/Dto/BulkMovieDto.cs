@@ -5,6 +5,7 @@ namespace KinoProgram.Webapp.Dto
 {
     public record BulkMovieDto(
         int Id,
+        Guid Guid,
         string Name,
         string Description,
         int Duration,

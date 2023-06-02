@@ -25,8 +25,7 @@ namespace KinoProgram.Webapp.Pages.Cinema
             _mapper = mapper;
         }
         public IReadOnlyList<Movie> Movies { get; private set; } = new List<Movie>();
-        //[BindProperty]
-        //public Dictionary<int, BulkMovieDto> EditMovies { get; private set; } = new();
+        public Dictionary<Guid, EditMovieDto> EditMovies { get; private set; } = new();
         [BindProperty]
         public NewMovieDto NewMovie { get; set; } = null!;
         public IActionResult OnPostNewMovie(NewMovieDto NewMovie)
@@ -44,7 +43,7 @@ namespace KinoProgram.Webapp.Pages.Cinema
             var (success, message) = _db.Insert(movie);
             if(!success) 
             {
-                ModelState.AddModelError("", message);
+                ModelState.AddModelError("", message ?? string.Empty);
                 return Page();
             }
             return RedirectToPage("/Cinema/Movies");
@@ -53,13 +52,29 @@ namespace KinoProgram.Webapp.Pages.Cinema
         {
             return Page();
         }
+        public IActionResult OnPostEditMovie(Guid movieguid, Dictionary<Guid, EditMovieDto> editMovies)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+            var movie = _db.FindByGuid(movieguid);
+            if (movie == null)
+            {
+                return RedirectToPage();
+            }
+            _mapper.Map(EditMovies[movieguid], movie);
+            _db.Update(movie);
+            return Page();
+        }
+
 
         public override void OnPageHandlerExecuting(PageHandlerExecutingContext context)
         {
             Movies = _db.GetMovies();
-            //EditMovies = _db.Movies
-            //    .ProjectTo<BulkMovieDto>(_mapper.ConfigurationProvider)
-            //    .ToDictionary(m => m.Id, m => m);
+            var movies = _mapper.ProjectTo<EditMovieDto>(_db.Set)
+                .ToDictionary(m => m.Guid, m => m);
+            EditMovies = movies;
         }
     }
 }

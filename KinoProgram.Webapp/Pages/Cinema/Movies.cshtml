@@ -47,30 +47,42 @@
     <button class="btn-primary btn" type="submit">Add movie</button>
 </form>
 
-<table class="table table-sm">
-    <thead>
-        <tr>
-            <th>Movie</th>
-            <th>Genre</th>
-            <th>Duration</th>
-            <th>Releasedate</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var m in Model.Movies)
-        {
+<form method="post">
+
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>Movie</th>
+                <th>Genre</th>
+                <th>Duration</th>
+                <th>Releasedate</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model.Movies)
+            {
                 <tr>
-                    <td>@m.Name</td>
+                    <td>
+                        <input type="hidden" asp-for="EditMovies[m.Guid].Guid" />
+                        @m.Name</td>
                     <td>@m.MovieCategory.ToString()</td>
-                    <td>@m.Duration Minutes</td>
+                    <td><input type="number" asp-for="EditMovies[m.Guid].Duration" /></td>
                     <td>@m.ReleaseDate.ToString("yyy-mm-dd")</td>
-                <td>
-                    <a asp-page="/Cinema/Details" asp-route-guid="@m.Guid">Details</a>
-                    <a asp-page="/Cinema/Edit" asp-route-guid="@m.Guid">Edit</a>
-                </td>
+                    <td>
+                        <a asp-page="/Cinema/Details" asp-route-guid="@m.Guid">Details</a>
+                        <a asp-page="/Cinema/Edit" asp-route-guid="@m.Guid">Edit</a>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-primary"
+                                asp-page-handler="EditMovie" asp-route-movieguid="@m.Guid">
+                            Save
+                        </button>
+                    </td>
                 </tr>
-        }
-    </tbody>
-</table>
+            }
+        </tbody>
+    </table>
+
+</form>
 

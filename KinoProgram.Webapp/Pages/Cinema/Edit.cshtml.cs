@@ -37,7 +37,7 @@ namespace KinoProgram.Webapp.Pages.Cinema
             var (success, message) = _db.Update(movie);
             if (!success)
             {
-                ModelState.AddModelError("", message);
+                ModelState.AddModelError("", message ?? string.Empty);
                 return Page();
             }
             return RedirectToPage("/Cinema/Movies");
