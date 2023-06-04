@@ -30,34 +30,6 @@ namespace KinoProgram.Webapp.Pages.Cinema
             _db.Set.OrderBy(m => m.Name).Select(m => new SelectListItem(m.Name, m.Id.ToString()));
         public IEnumerable<SelectListItem> HallSelectList =>
             _db.Set.Select(m => new SelectListItem(m.Id.ToString(), m.Id.ToString()));
-        //public IActionResult OnPostNewWeekProgram(int WeekNumber)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return Page();
-        //    }
-        //    var weeklyprogram = _mapper.Map<WeeklyProgram>(NewWeekProgram);
-        //    weeklyprogram.Movie = _db.Movies.FirstOrDefault(m => m.Id == NewWeekProgram.Movie.Id)
-        //                ?? throw new ApplicationException("unvalid movie");
-        //    weeklyprogram.CinemaHall = _db.CinemaHalls.FirstOrDefault(m => m.Id == NewWeekProgram.CinemaHall.Id)
-        //                ?? throw new ApplicationException("unvalid hall");
-        //    if (weeklyprogram is null)
-        //    {
-        //        return RedirectToPage("/Cinema/WeekProgram/" + WeekNumber);
-        //    }
-        //    _mapper.Map(NewWeekProgram, weeklyprogram);
-        //    try
-        //    {
-        //        _db.Add(weeklyprogram);
-        //        _db.SaveChanges();
-        //    }
-        //    catch (DbUpdateException)
-        //    {
-        //        ModelState.AddModelError("", "Fehler beim Schreiben in die Datenbank");
-        //        return Page();
-        //    }
-        //    return RedirectToPage("/Cinema/WeekProgram/" + WeekNumber);
-        //}
 
         public IActionResult OnGet(int WeekNumber)
         {

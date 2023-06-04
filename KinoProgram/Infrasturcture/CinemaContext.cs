@@ -1,4 +1,6 @@
 ﻿using Bogus;
+using KinoProgram.Application.Infrasturcture;
+using KinoProgram.Application.models;
 using KinoProgram.models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,6 +17,7 @@ namespace KinoProgram.Infrasturcture
         public DbSet<CinemaHall> CinemaHalls => Set<CinemaHall>();
         public DbSet<Movie> Movies => Set<Movie>();
         public DbSet<WeeklyProgram> WeeklyPrograms => Set<WeeklyProgram>();
+        public DbSet<User> Users => Set<User>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,10 +31,19 @@ namespace KinoProgram.Infrasturcture
             }
         }
 
-        public void Seed()
+        public void Seed(ICryptService cryptService)
         {
             Randomizer.Seed = new Random(1111);
-           
+
+            var adminSalt = cryptService.GenerateSecret(256);
+            var admin = new User(
+                username: "admin",
+                salt: adminSalt,
+                passwordHash: cryptService.GenerateHash(adminSalt, "admin"),
+                usertype: Usertype.Admin);
+            Users.Add(admin);
+            SaveChanges();
+
             var movies = new Faker<Movie>("de").CustomInstantiator(m => new Movie(
                 name: m.Person.FirstName,
                 description: m.Music.Genre(),

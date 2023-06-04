@@ -3,6 +3,7 @@ using KinoProgram.Application.Infrasturcture.Repositories;
 using KinoProgram.Infrasturcture;
 using KinoProgram.models;
 using KinoProgram.Webapp.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using System.Linq;
 
 namespace KinoProgram.Webapp.Pages.Cinema
 {
+    [Authorize(Roles = "Admin")]
     public class EditModel : PageModel
     {
         private readonly MovieRepository _db;

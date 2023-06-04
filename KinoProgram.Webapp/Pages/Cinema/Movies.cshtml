@@ -1,12 +1,14 @@
 ﻿@page
 @model KinoProgram.Webapp.Pages.Cinema.MoviesModel
+@inject KinoProgram.Webapp.Services.AuthService AuthService
 @section head 
 {
 }
-<h3>The Cinema program of this Week</h3>
+<h3>Movie list</h3>
 <p>Created at @DateTime.Now.ToString("HH:mm").</p>
-
-<form method="post" asp-page-handler="NewMovie">
+@if (AuthService.IsAuthenticated)
+{
+   <form method="post" asp-page-handler="NewMovie">
     <div class="row">
         <div class="col-12 col-sm-6">
             <label asp-for="NewMovie.Name">Name</label>
@@ -45,7 +47,8 @@
     </div>
     <div class="mt-3 text-danger" asp-validation-summary=All></div>
     <button class="btn-primary btn" type="submit">Add movie</button>
-</form>
+</form> 
+}
 
 <form method="post" asp-page-handler="EditMovie">
 
@@ -68,21 +71,37 @@
                         <input type="hidden" asp-for="EditMovies[m.Guid].Guid" />
                         @m.Name</td>
                     <td>@m.MovieCategory.ToString()</td>
-                    <td><input type="number" asp-for="EditMovies[m.Guid].Duration" /></td>
+                    @if (AuthService.IsAuthenticated)
+                    {
+                        <td><input type="number" asp-for="EditMovies[m.Guid].Duration" /></td>
+                    }
+                    else
+                    {
+                       <td>@m.Duration</td> 
+                    }
                     <td>@m.ReleaseDate.ToString("yyy-mm-dd")</td>
                     <td>
-                        <a asp-page="/Cinema/Details" asp-route-guid="@m.Guid"><i class="fa-sharp fa-regular fa-circle-info"></i></a>
-                        <a class="ms-2" asp-page="/Cinema/Edit" asp-route-guid="@m.Guid"><i class="fa-regular fa-pen-to-square"></i></a>
-                        <a class="ms-2" asp-page="/Cinema/DeleteMovie" asp-route-guid="@m.Guid"><i class="fa-regular fa-trash-can"></i></a>
+                        @if (AuthService.IsAuthenticated)
+                        {
+                            <a asp-page="/Cinema/Details" asp-route-guid="@m.Guid"><i class="fa-sharp fa-regular fa-circle-info"></i></a>
+                            <a class="ms-2" asp-page="/Cinema/Edit" asp-route-guid="@m.Guid"><i class="fa-regular fa-pen-to-square"></i></a>
+                            <a class="ms-2" asp-page="/Cinema/DeleteMovie" asp-route-guid="@m.Guid"><i class="fa-regular fa-trash-can"></i></a>
+                        }
+                        else
+                        {
+                            <a asp-page="/Cinema/Details" asp-route-guid="@m.Guid"><i class="fa-sharp fa-regular fa-circle-info"></i></a>
+                        }
+
                     </td>
-                    <td><button type="submit" class="btn btn-primary"
-                        asp-page-handler="EditMovie" asp-route-movieguid="@m.Guid">
-                                Save
-                                </button></td>
+                    <td>
+                        @if (AuthService.IsAuthenticated)
+                        {
+                            <button type="submit" class="btn btn-primary" asp-page-handler="EditMovie" asp-route-movieguid="@m.Guid">Save</button>
+                        }
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
-
 </form>
 

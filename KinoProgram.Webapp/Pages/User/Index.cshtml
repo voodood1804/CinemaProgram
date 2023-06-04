@@ -1,0 +1,30 @@
+﻿@page
+@model KinoProgram.Webapp.Pages.User.IndexModel
+
+<h3>Usertabelle</h3>
+
+<p>
+    Diese Tabelle zeigt alle angelegten User. Sie dient nur der Veranschaulichung und wird
+    in echten Programmen natürlich nie veröffentlicht.
+</p>
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Type</th>
+            <th>Salt</th>
+            <th>Password Hash</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in Model.Users)
+        {
+            <tr>
+                <td>@u.Username</td>
+                <td>@u.Usertype</td>
+                <td><pre>@u.Salt</pre></td>
+                <td><pre>@u.PasswordHash</pre></td>
+            </tr>
+        }
+    </tbody>
+</table>

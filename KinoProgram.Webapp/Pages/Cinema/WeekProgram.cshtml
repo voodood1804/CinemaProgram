@@ -1,4 +1,5 @@
 ﻿@page "{WeekNumber}"
+@inject KinoProgram.Webapp.Services.AuthService AuthService
 @model KinoProgram.Webapp.Pages.Cinema.WeekProgramModel
 @section head 
 {
@@ -6,7 +7,9 @@
 <h3>The program of this Week</h3>
 <p>Created at @DateTime.Now.ToString("HH:mm").</p>
 
-<form method="post" asp-page-handler="NewWeekProgram">
+@if (AuthService.IsAuthenticated)
+{
+    <form method="post" asp-page-handler="NewWeekProgram">
     <div class="row">
         <div class="col-6">
             <label asp-for="NewWeekProgram.Movie">Movie</label>
@@ -31,6 +34,7 @@
     <div class="text-danger" asp-validation-summary=ModelOnly></div>
     <button class="mt-2 btn btn-primary">Speichern</button>
 </form>
+}
 
 <table class="table table-sm">
     <thead>
@@ -40,7 +44,7 @@
             <th>Hall</th>
             <th>Duration</th>
             <th>PlayTime</th>
-            <th></th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -52,12 +56,9 @@
                     <td>@w.Hall</td>
                     <td>@w.Duration Minutes</td>
                     <td>On the @w.PlayTime.ToString("dd. @ HH:mm")</td>
-                    <td>
-                    <a asp-page="/Cinema/Details" asp-route-guid="@w.Guid">Details</a>
-                    
-                    </td>
+                    <td><a asp-page="/Cinema/Details" asp-route-guid="@w.Guid"><i class="fa-sharp fa-regular fa-circle-info"></i></a></td>
                 </tr>
         }
     </tbody>
 </table>
-<a href="/Cinema/Index">Return to Movie List</a>
+<a href="/Cinema/Index">return</a>

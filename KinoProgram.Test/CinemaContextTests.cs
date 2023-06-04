@@ -1,4 +1,5 @@
-﻿using KinoProgram.Infrasturcture;
+﻿using KinoProgram.Application.Infrasturcture;
+using KinoProgram.Infrasturcture;
 using Microsoft.EntityFrameworkCore;
 
 namespace SpaceProgram.Test
@@ -30,7 +31,7 @@ namespace SpaceProgram.Test
         public void SeedDatabaseTest()
         {
             using var db = GetDatabase(deleteDb: true);
-            db.Seed();
+            db.Seed(new CryptService());
         }
     }
 }

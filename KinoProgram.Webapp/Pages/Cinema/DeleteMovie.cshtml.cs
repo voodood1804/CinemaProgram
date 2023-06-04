@@ -1,6 +1,7 @@
 using KinoProgram.Application.Infrasturcture.Repositories;
 using KinoProgram.models;
 using KinoProgram.Webapp.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
@@ -8,6 +9,7 @@ using static System.Formats.Asn1.AsnWriter;
 
 namespace KinoProgram.Webapp.Pages.Cinema
 {
+    [Authorize(Roles = "Admin")]
     public class DeleteMovieModel : PageModel
     {
         private readonly MovieRepository _movies;

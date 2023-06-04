@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Filters;
 using AutoMapper.QueryableExtensions;
 using KinoProgram.Application.Infrasturcture.Repositories;
+using Microsoft.AspNetCore.Authorization;
+using KinoProgram.Webapp.Services;
 
 namespace KinoProgram.Webapp.Pages.Cinema
 {
@@ -19,10 +21,12 @@ namespace KinoProgram.Webapp.Pages.Cinema
     {
         private readonly MovieRepository _db;
         private readonly IMapper _mapper;
-        public MoviesModel(MovieRepository db, IMapper mapper)
+        private readonly AuthService _authService;
+        public MoviesModel(MovieRepository db, IMapper mapper, AuthService authService)
         {
             _db = db;
             _mapper = mapper;
+            _authService = authService;
         }
         public IReadOnlyList<Movie> Movies { get; private set; } = new List<Movie>();
         public Dictionary<Guid, EditMovieDto> EditMovies { get; private set; } = new();
