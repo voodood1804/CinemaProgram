@@ -14,6 +14,16 @@ namespace KinoProgram.Application.Infrasturcture.Repositories
             string GenreList,
             int? MoviesCount);
 
+        public record NewWeekprogramDto(
+            int CalendarWeek,
+            Movie Movie,
+            CinemaHall CinemaHall,
+            DateTime PlayTime,
+            Guid Guid,
+            Guid MovieGuid,
+            Guid HallGuid
+            );
+
         public WeeklyProgramRepository(CinemaContext db) : base(db) { }
 
         public IReadOnlyList<WeeklyProgramDto> GetProgramCount()
@@ -40,6 +50,20 @@ namespace KinoProgram.Application.Infrasturcture.Repositories
         public override (bool success, string? message) Delete(WeeklyProgram wp)
         {
             return base.Delete(wp);
+        }
+
+        public (bool success, string? message) Insert(int weeknumber, Guid movieGuid, Guid hallGuid, DateTime playtime)
+        {
+            var movie = _db.Movies.FirstOrDefault(m => m.Guid == movieGuid);
+            if (movie == null) { return (false, "Invalid movie."); }
+            var hall = _db.CinemaHalls.FirstOrDefault(h => h.Guid == hallGuid);
+            if (hall == null) { return (false, "Invalid cinemahall."); }
+            return base.Insert(new WeeklyProgram(
+                calendarWeek: weeknumber,
+                movie: movie,
+                cinemaHall: hall,
+                playTime: playtime
+                ));
         }
     }
 }

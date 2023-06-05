@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="text-danger" asp-validation-summary=ModelOnly></div>
-    <button class="mt-2 btn btn-primary">Speichern</button>
+    <button class="mt-2 btn btn-primary">Add</button>
 </form>
 }
 
@@ -56,7 +56,18 @@
                     <td>@w.Hall</td>
                     <td>@w.Duration Minutes</td>
                     <td>On the @w.PlayTime.ToString("dd. @ HH:mm")</td>
-                    <td><a asp-page="/Cinema/Details" asp-route-guid="@w.Guid"><i class="fa-sharp fa-regular fa-circle-info"></i></a></td>
+                    <td>
+                @if (AuthService.IsAuthenticated)
+                {
+                    <a asp-page="/Cinema/Details" asp-route-guid="@w.Guid"><i class="fa-sharp fa-regular fa-circle-info"></i></a>
+                    <a class="ms-2" asp-page="/Cinema/Edit" asp-route-guid="@w.Guid"><i class="fa-regular fa-pen-to-square"></i></a>
+                    <a class="ms-2" asp-page="/Cinema/DeleteMovie" asp-route-guid="@w.Guid"><i class="fa-regular fa-trash-can"></i></a>
+                }
+                else
+                {
+                    <a asp-page="/Cinema/Details" asp-route-guid="@w.Guid"><i class="fa-sharp fa-regular fa-circle-info"></i></a>
+                }
+                </td>
                 </tr>
         }
     </tbody>
