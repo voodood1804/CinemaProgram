@@ -27,24 +27,24 @@ namespace KinoProgram.Webapp.Pages.Cinema
             _mapper = mapper;
         }
         public IReadOnlyList<WeekProgramRepository.MoviesDto> WeekProgram { get; private set; } = new List<WeekProgramRepository.MoviesDto>();
-
+        [FromRoute]
+        public int WeekNumber { get; set; }
         [BindProperty]
-        public NewWeekprogramDto NewWeekProgram { get; set; } = default!;
+        public TestDto NewWeekProgram { get; set; } = null!;
         public IEnumerable<SelectListItem> MovieSelectList =>
             _db.Set.OrderBy(m => m.Name).Select(m => new SelectListItem(m.Name, m.Guid.ToString()));
         public IEnumerable<SelectListItem> HallSelectList =>
             _db.Set.Select(h => new SelectListItem(h.Id.ToString(), h.Guid.ToString()));
 
-        public IActionResult OnPostNewOffer(int weekNumber, NewWeekprogramDto newWeekProgram)
+        public IActionResult OnPostNewWeekProgram(int weekNumber, TestDto newWeekProgram)
         {
             if (!ModelState.IsValid) { return Page(); }
 
             var (success, message) = _weeklyProgram.Insert(
                 weeknumber: weekNumber,
                 movieGuid: newWeekProgram.MovieGuid,
-                hallGuid: newWeekProgram.HallGuid,
-                playtime: newWeekProgram.PlayTime
-                );
+                hallGuid: newWeekProgram.CinemaHallGuid,
+                playtime: newWeekProgram.PlayTime);
 
             if (!success)
             {

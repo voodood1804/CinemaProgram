@@ -24,14 +24,15 @@ namespace KinoProgram.Webapp.Pages.Cinema
         public IActionResult OnPostCancel() => RedirectToPage("/Cinema/Movies");
         public IActionResult OnPostDelete(Guid guid)
         {
-            var movie = _w.FindByGuid(guid);
-            if (movie is null)
+            var wp = _w.FindByGuid(guid);
+            if (wp is null)
             {
                 return RedirectToPage("/Cinema/Movies");
             }
-            var (success, message) = _w.Delete(movie);
+            int weeknr = wp.CalendarWeek;
+            var (success, message) = _w.Delete(wp);
             if (!success) { Message = message; }
-            return RedirectToPage("/Cinema/Movies");
+            return RedirectToPage("/Cinema/Movies" + weeknr);
         }
         public IActionResult OnGet(Guid guid)
         {

@@ -12,19 +12,19 @@
     <form method="post" asp-page-handler="NewWeekProgram">
     <div class="row">
         <div class="col-6">
-            <label asp-for="NewWeekProgram.Movie">Movie</label>
+                <label asp-for="NewWeekProgram.MovieGuid">Movie</label>
             <select class="form-select" 
                 asp-items="@Model.MovieSelectList"
-                    asp-for="NewWeekProgram.Movie"></select>
+                    asp-for="NewWeekProgram.MovieGuid"></select>
         </div>
         <div class="col-6">
-            <label asp-for="NewWeekProgram.CinemaHall">Hall</label>
+                <label asp-for="NewWeekProgram.CinemaHallGuid">Hall</label>
             <select class="form-select"
                     asp-items="@Model.HallSelectList"
-                    asp-for="NewWeekProgram.CinemaHall"></select>
+                    asp-for="NewWeekProgram.CinemaHallGuid"></select>
         </div>
         <div class="col-6">
-            <label asp-for="NewWeekProgram.PlayTime">PlayTime</label>
+                <label asp-for="NewWeekProgram.PlayTime">PlayTime</label>
             <input type="date" class="form-control" asp-for="NewWeekProgram.PlayTime" />
             <small>
                 <span class="text-danger" asp-validation-for="NewWeekProgram.PlayTime"></span>
@@ -61,7 +61,7 @@
                 {
                     <a asp-page="/Cinema/Details" asp-route-guid="@w.Guid"><i class="fa-sharp fa-regular fa-circle-info"></i></a>
                     <a class="ms-2" asp-page="/Cinema/Edit" asp-route-guid="@w.Guid"><i class="fa-regular fa-pen-to-square"></i></a>
-                    <a class="ms-2" asp-page="/Cinema/DeleteMovie" asp-route-guid="@w.Guid"><i class="fa-regular fa-trash-can"></i></a>
+                    <a class="ms-2" asp-page="/Cinema/DeleteWeeklyProgram" asp-route-guid=""><i class="fa-regular fa-trash-can"></i></a>
                 }
                 else
                 {

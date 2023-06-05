@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using KinoProgram.models;
+using System;
 
 namespace KinoProgram.Webapp.Dto
 {
@@ -18,6 +19,12 @@ namespace KinoProgram.Webapp.Dto
 
             CreateMap<WeeklyProgram, WeeklyProgramDto>();
             CreateMap<WeeklyProgramDto, WeeklyProgram>();
+
+            CreateMap<TestDto, WeeklyProgram>()
+                .ForMember(
+                    o => o.Guid,
+                    opt => opt.MapFrom(o => o.Guid == default ? Guid.NewGuid() : o.Guid));
+            CreateMap<WeeklyProgram, TestDto>();
         }
     }
 }

@@ -15,13 +15,11 @@ namespace KinoProgram.Application.Infrasturcture.Repositories
             int? MoviesCount);
 
         public record NewWeekprogramDto(
+            Guid Guid,
             int CalendarWeek,
             Movie Movie,
             CinemaHall CinemaHall,
-            DateTime PlayTime,
-            Guid Guid,
-            Guid MovieGuid,
-            Guid HallGuid
+            DateTime PlayTime
             );
 
         public WeeklyProgramRepository(CinemaContext db) : base(db) { }
