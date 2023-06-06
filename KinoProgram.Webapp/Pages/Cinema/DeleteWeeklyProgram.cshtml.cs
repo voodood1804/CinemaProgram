@@ -17,29 +17,31 @@ namespace KinoProgram.Webapp.Pages.Cinema
         {
             _w = weeklyProgram;
         }
+        [FromRoute]
+        public Guid WeeklyProgramGuid { get; set; }
 
         [TempData]
         public string? Message { get; set; }
         public WeeklyProgram WeeklyProgram { get; set; }
-        public IActionResult OnPostCancel() => RedirectToPage("/Cinema/Movies");
-        public IActionResult OnPostDelete(Guid guid)
+        public IActionResult OnPostCancel() => RedirectToPage("/Cinema/WeekProgram");
+        public IActionResult OnPostDelete(Guid weeklyProgramGuid)
         {
-            var wp = _w.FindByGuid(guid);
+            var wp = _w.FindByGuid(weeklyProgramGuid);
             if (wp is null)
             {
-                return RedirectToPage("/Cinema/Movies");
+                return RedirectToPage("/Cinema/WeekProgram");
             }
             int weeknr = wp.CalendarWeek;
             var (success, message) = _w.Delete(wp);
             if (!success) { Message = message; }
-            return RedirectToPage("/Cinema/Movies" + weeknr);
+            return RedirectToPage("/Cinema/WeekProgram" + weeknr);
         }
-        public IActionResult OnGet(Guid guid)
+        public IActionResult OnGet(Guid weeklyProgramGuid)
         {
-            var weeklyProgram = _w.FindByGuid(guid);
+            var weeklyProgram = _w.FindByGuid(weeklyProgramGuid);
             if (weeklyProgram == null)
             {
-                return RedirectToPage("/Cinema/Movies");
+                return RedirectToPage("/Cinema/WeekProgram");
             }
             WeeklyProgram = weeklyProgram;
             return Page();

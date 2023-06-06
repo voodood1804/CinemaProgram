@@ -29,6 +29,7 @@ builder.Services.AddDbContext<CinemaContext>(opt =>
 });
 builder.Services.AddTransient<WeeklyProgramRepository>();
 builder.Services.AddTransient<MovieRepository>();
+builder.Services.AddTransient<HallRepository>();
 builder.Services.AddTransient<UserRepository>();
 builder.Services.AddTransient<WeekProgramRepository>();
 builder.Services.AddAutoMapper(typeof(MappingProfile));

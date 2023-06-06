@@ -42,6 +42,7 @@ namespace KinoProgram.Application.Infrasturcture.Repositories
                 })
                 .OrderBy(m => m.WeekNumber)
                 .ToList();
+
             return weeklyPrograms;
         }
 

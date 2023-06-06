@@ -1,5 +1,6 @@
 ﻿using KinoProgram.Infrasturcture;
 using KinoProgram.models;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,8 @@ namespace KinoProgram.Application.Infrasturcture.Repositories
             string Genre,
             int Hall,
             int Duration,
-            Guid Guid,
+            Guid MovieGuid,
+            Guid WeeklyProgramGuid,
             DateTime PlayTime
             );
 
@@ -33,6 +35,7 @@ namespace KinoProgram.Application.Infrasturcture.Repositories
                     g.CinemaHallId,
                     g.Movie.Duration,
                     g.Movie.Guid,
+                    g.Guid,
                     g.PlayTime))
                 .ToList();
             return weekProgram;

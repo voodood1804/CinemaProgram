@@ -22,5 +22,4 @@ namespace KinoProgram.Application.Infrasturcture.Repositories
             return base.Insert(entity);
         }
     }
-
 }

@@ -1,9 +1,23 @@
 ﻿@page "{WeekNumber}"
+@using System.Globalization;
 @inject KinoProgram.Webapp.Services.AuthService AuthService
 @model KinoProgram.Webapp.Pages.Cinema.WeekProgramModel
 @section head 
 {
 }
+@{
+    DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+    Calendar cal = dfi.Calendar; // Die gewünschte Woche
+
+    DateTime firstDayOfWeek = DateTime.Now; // Aktuelles Datum als Basis nehmen
+    while (cal.GetWeekOfYear(firstDayOfWeek, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) != Model.WeekNumber)
+    {
+        firstDayOfWeek = firstDayOfWeek.AddDays(-1);
+    }
+
+    DateTime lastDayOfWeek = firstDayOfWeek.AddDays(6);
+}
+
 <h3>The program of this Week</h3>
 <p>Created at @DateTime.Now.ToString("HH:mm").</p>
 
@@ -25,7 +39,7 @@
         </div>
         <div class="col-6">
                 <label asp-for="NewWeekProgram.PlayTime">PlayTime</label>
-            <input type="date" class="form-control" asp-for="NewWeekProgram.PlayTime" />
+                <input type="datetime-local" class="form-control" asp-for="NewWeekProgram.PlayTime" min="@firstDayOfWeek.ToString("yyyy-MM-ddTHH:mm")" max="@lastDayOfWeek.ToString("yyyy-MM-ddTHH:mm")" />
             <small>
                 <span class="text-danger" asp-validation-for="NewWeekProgram.PlayTime"></span>
             </small>
@@ -59,13 +73,13 @@
                     <td>
                 @if (AuthService.IsAuthenticated)
                 {
-                    <a asp-page="/Cinema/Details" asp-route-guid="@w.Guid"><i class="fa-sharp fa-regular fa-circle-info"></i></a>
-                    <a class="ms-2" asp-page="/Cinema/Edit" asp-route-guid="@w.Guid"><i class="fa-regular fa-pen-to-square"></i></a>
-                    <a class="ms-2" asp-page="/Cinema/DeleteWeeklyProgram" asp-route-guid=""><i class="fa-regular fa-trash-can"></i></a>
+                        <a asp-page="/Cinema/Details" asp-route-guid="@w.MovieGuid"><i class="fa-sharp fa-regular fa-circle-info"></i></a>
+                        <a class="ms-2" asp-page="/Cinema/Edit" asp-route-guid="@w.MovieGuid"><i class="fa-regular fa-pen-to-square"></i></a>
+                        <a class="ms-2" asp-page="/Cinema/DeleteWeeklyProgram" asp-route-guid="@w.WeeklyProgramGuid"><i class="fa-regular fa-trash-can"></i></a>
                 }
                 else
                 {
-                    <a asp-page="/Cinema/Details" asp-route-guid="@w.Guid"><i class="fa-sharp fa-regular fa-circle-info"></i></a>
+                        <a asp-page="/Cinema/Details" asp-route-guid="@w.MovieGuid"><i class="fa-sharp fa-regular fa-circle-info"></i></a>
                 }
                 </td>
                 </tr>
